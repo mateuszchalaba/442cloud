@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 442 Cloud — strona (rebuild)
 
-## Getting Started
+Jednostronicowa (one-page) strona firmowa **442 Cloud** — Next.js 16 (App Router) +
+React 19 + Tailwind CSS v4 + TypeScript. Profesjonalna, w pełni responsywna, z futbolowym
+twistem (formacja 4-4-2, „game plan", „squad"). Zachowana oryginalna kolorystyka
+(granat + zielony) i wszystkie grafiki.
 
-First, run the development server:
+---
+
+## Wymagania
+
+- **Node.js 18.18+** (zalecane 20 LTS lub nowsze)
+- npm (lub yarn / pnpm / bun)
+- Dostęp do internetu przy pierwszym `dev`/`build` — czcionki (Oxanium, Inter) pobiera
+  automatycznie `next/font/google`.
+
+## Uruchomienie (development)
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Otwórz **http://localhost:3000**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Wersja produkcyjna
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run build
+npm start
+```
 
-## Learn More
+`npm start` uruchamia zoptymalizowany build na porcie 3000.
 
-To learn more about Next.js, take a look at the following resources:
+## Lint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Struktura projektu
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+442cloud/
+├── public/
+│   ├── crew/                 # zdjęcia zespołu (mateusz / kamil / michal .jpg)
+│   └── slides/               # grafiki: first / flag / balls / contact .png
+├── src/
+│   ├── app/
+│   │   ├── favicon.ico
+│   │   ├── globals.css       # design system: tokeny kolorów, tekstury boiska, animacje
+│   │   ├── layout.tsx        # czcionki (Oxanium + Inter) + metadane SEO / OpenGraph
+│   │   └── page.tsx          # cała strona (wszystkie sekcje)
+│   └── components/
+│       ├── Navbar.tsx        # sticky glass nav, pasek postępu, menu mobilne (client)
+│       ├── Reveal.tsx        # animacje scroll-reveal (IntersectionObserver, client)
+│       └── TacticBoard.tsx   # boisko SVG z formacją 4-4-2
+├── next.config.ts
+├── postcss.config.mjs
+├── tailwind.config.js
+├── tsconfig.json
+└── package.json
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Sekcje strony
+
+1. **Hero** — stadion (`first.png`), hasło „Engineering your digital victory", 2× CTA.
+2. **Formation** — filozofia 4-4-2 + interaktywna tablica taktyczna (SVG) + flaga
+   (`flag.png`) + karty: Defence / Midfield / Attack.
+3. **Skillset** — kompetencje Agentforce (`balls.png` w tle) jako siatka kart.
+4. **Game Plan** — 3 fazy: Kick-off → Tactics → Full time.
+5. **Squad** — zespół z numerami na koszulkach.
+6. **Contact** — CTA + e-mail (`contact.png` w tle).
+7. **Footer** — logo, nawigacja, kontakt.
+
+> Sekcja „Our History" / timeline została **usunięta** zgodnie z wymaganiem.
+
+---
+
+## Co zmienić / jak edytować
+
+- **Teksty i dane** (skillset, kroki, zespół) — tablice na górze `src/app/page.tsx`
+  (`SKILLS`, `LINES`, `STEPS`, `CREW`).
+- **Kolory / czcionki / animacje** — sekcja `@theme` oraz reguły w `src/app/globals.css`.
+- **Formacja na boisku** — współrzędne zawodników w `src/components/TacticBoard.tsx`.
+- **E-mail kontaktowy** — `contact@442cloud.com` w `page.tsx` (sekcja Contact + footer).
+- **SEO / tytuł / OpenGraph** — `metadata` w `src/app/layout.tsx`
+  (pamiętaj o ustawieniu prawdziwej domeny w `metadataBase`).
+
+## Deploy
+
+Projekt jest gotowy pod **Vercel** (twórcy Next.js) — wystarczy podłączyć repo.
+Działa też na dowolnym hostingu Node (`npm run build` + `npm start`) lub w kontenerze.
+
+---
+
+## Uwaga bezpieczeństwa
+
+Wersja Next.js została podniesiona z `16.0.5` do **`16.2.12`** (łatka na
+CVE-2025-66478). Warto regularnie aktualizować zależności: `npm outdated` / `npm update`.

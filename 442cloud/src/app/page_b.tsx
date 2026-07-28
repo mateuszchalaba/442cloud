@@ -306,7 +306,7 @@ export default function Home() {
                 </Reveal>
 
                 <Reveal delay={260}>
-                  <div className="anim-floaty ml-auto mt-6 hidden w-36 overflow-hidden rounded-2xl border border-white/15 shadow-2xl shadow-black/60 sm:block lg:w-40">
+                  <div className="anim-floaty absolute -bottom-8 -right-2 hidden w-40 overflow-hidden rounded-2xl border border-white/15 shadow-2xl shadow-black/60 sm:block lg:-right-6 lg:w-48">
                     <div className="relative aspect-[2/3]">
                       <Image
                         src="/slides/flag.png"

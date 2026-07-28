@@ -1,26 +1,228 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   442 CLOUD — Design tokens (Tailwind v4 @theme)
+   ============================================================ */
+@theme {
+  /* Fonts (wired to next/font variables in layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-oxanium), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand palette — dark navy "pitch at night" + electric grass green */
+  --color-ink: #04070f;
+  --color-ink-800: #060b19;
+  --color-ink-700: #0a1225;
+  --color-ink-600: #0f1b33;
+
+  --color-brand-100: #d8fce8;
+  --color-brand-200: #aef6ce;
+  --color-brand-300: #7ff2b0;
+  --color-brand-400: #4fe895;
+  --color-brand-500: #22e07b;
+  --color-brand-600: #14c268;
+  --color-brand-700: #0f9a53;
+
+  --color-chalk: #eaf1f6;
+  --color-muted: #9fb0c3;
+
+  /* Easing */
+  --ease-out-soft: cubic-bezier(0.22, 0.7, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================================
+   Base
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ink);
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-brand-500) 45%, transparent);
+  color: #fff;
+}
+
+/* Custom scrollbar (desktop) */
+@media (pointer: fine) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand-600) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--color-brand-600) 70%, black);
+    border-radius: 999px;
+  }
+}
+
+/* Anchor offset so sections don't hide under the fixed navbar */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* ============================================================
+   Textures / motifs
+   ============================================================ */
+
+/* Subtle "field lines" grid used on dark sections */
+.pitch-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
+}
+
+/* Grass stripes for the tactic board */
+.grass-stripes {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0 12.5%,
+    rgba(0, 0, 0, 0.06) 12.5% 25%
+  );
+}
+
+/* Soft radial glow */
+.glow-brand {
+  background: radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--color-brand-500) 55%, transparent) 0%,
+    transparent 68%
+  );
+}
+
+/* Glass surface */
+.glass {
+  background: color-mix(in oklab, var(--color-ink-700) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(120deg, #ffffff 0%, var(--color-brand-300) 55%, var(--color-brand-500) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Thin accent underline */
+.accent-bar {
+  height: 3px;
+  width: 4.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-brand-500), var(--color-brand-300));
+  box-shadow: 0 0 18px color-mix(in oklab, var(--color-brand-500) 60%, transparent);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  transition: transform 0.25s var(--ease-out-soft), box-shadow 0.25s var(--ease-out-soft),
+    background-color 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn-primary {
+  padding: 0.85rem 1.6rem;
+  color: #04240f;
+  background: linear-gradient(120deg, var(--color-brand-400), var(--color-brand-600));
+  box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--color-brand-500) 65%, transparent);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -8px color-mix(in oklab, var(--color-brand-500) 75%, transparent);
+}
+
+.btn-ghost {
+  padding: 0.85rem 1.5rem;
+  color: var(--color-chalk);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: color-mix(in oklab, var(--color-ink-600) 40%, transparent);
+}
+.btn-ghost:hover {
+  border-color: color-mix(in oklab, var(--color-brand-400) 70%, transparent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Scroll-reveal (see components/Reveal.tsx)
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease-out-soft), transform 0.7s var(--ease-out-soft);
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.anim-floaty { animation: floaty 6s ease-in-out infinite; }
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.82); }
+}
+.anim-pulse-dot {
+  animation: pulseDot 2.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes scrollNudge {
+  0% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(7px); opacity: 0.35; }
+  100% { transform: translateY(0); opacity: 0.9; }
+}
+.anim-nudge { animation: scrollNudge 1.8s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
