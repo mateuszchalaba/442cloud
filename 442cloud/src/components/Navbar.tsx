@@ -7,6 +7,7 @@ const LINKS = [
   { href: "#skillset", label: "Skillset" },
   { href: "#gameplan", label: "Game Plan" },
   { href: "#squad", label: "Squad" },
+  { href: "#trophies", label: "Trophies" },
   { href: "#contact", label: "Contact" },
 ];
 

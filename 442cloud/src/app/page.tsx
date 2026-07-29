@@ -158,6 +158,24 @@ const CREW: { name: string; role: string; photo: string; no: string }[] = [
   { name: "Michał Kwika", role: "Board Member", photo: "/crew/michal.jpg", no: "8" },
 ];
 
+// Salesforce certifications — the trophy cabinet
+const CERTS: { name: string; img: string }[] = [
+  { name: "Agentforce Specialist", img: "/certs/agentforceSpecialist.png" },
+  { name: "Agentforce Sales Consultant", img: "/certs/agentforceSalesConsultant.png" },
+  { name: "Application Architect", img: "/certs/applicationArchitect.png" },
+  { name: "System Architect", img: "/certs/systemArchitect.png" },
+  { name: "Integration Architect", img: "/certs/integrationArchitect.png" },
+  { name: "Platform Data Architect", img: "/certs/plarformDataArchitect.png" },
+  { name: "Identity & Access Management Architect", img: "/certs/identityAndAccessMngmtArchitect.png" },
+  { name: "Sharing & Visibility Architect", img: "/certs/sharingAndVisibilityArchitect.png" },
+  { name: "Development Lifecycle & Deployment Architect", img: "/certs/platformDevLifecycleDeploymentArchitect.png" },
+  { name: "Platform Developer", img: "/certs/platformDeveloper.png" },
+  { name: "Platform App Builder", img: "/certs/platformAppBuilder.png" },
+  { name: "Platform Administrator", img: "/certs/platformAdmin.png" },
+  { name: "Data 360 Consultant", img: "/certs/d360consultant.png" },
+  { name: "Experience Cloud Consultant", img: "/certs/xperienceCloudConsultant.png" },
+];
+
 export default function Home() {
   return (
     <>
@@ -474,6 +492,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ============================ TROPHY CABINET ============================ */}
+        <section id="trophies" className="relative overflow-hidden bg-ink py-24 sm:py-32">
+          <div className="pitch-grid absolute inset-0 opacity-50" aria-hidden />
+          <div className="glow-brand absolute -left-40 bottom-0 h-96 w-96 opacity-20 blur-3xl" aria-hidden />
+
+          <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Trophy cabinet"
+                title={
+                  <>
+                    Silverware in the <span className="text-brand-400">cabinet</span>
+                  </>
+                }
+                intro="Every Salesforce certification is a trophy we've lifted. Proof the squad is match-fit right across the platform — from admin to architect."
+              />
+              <Reveal delay={120}>
+                <div className="glass flex items-center gap-4 rounded-2xl px-6 py-4">
+                  <span className="font-display text-4xl font-extrabold text-brand-400">
+                    {CERTS.length}
+                  </span>
+                  <span className="text-sm leading-tight text-muted">
+                    Salesforce
+                    <br />
+                    certifications
+                  </span>
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+              {CERTS.map((c, i) => (
+                <Reveal key={c.img} delay={(i % 4) * 60}>
+                  <figure className="group flex h-full flex-col items-center rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-5 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-500/50 hover:from-white/[0.12] hover:shadow-[0_20px_45px_-20px_rgba(34,224,123,0.55)]">
+                    <div className="relative h-24 w-24 shrink-0 transition-transform duration-300 group-hover:scale-105 sm:h-28 sm:w-28">
+                      <Image
+                        src={c.img}
+                        alt={`Salesforce Certified ${c.name}`}
+                        fill
+                        sizes="112px"
+                        className="object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.45)]"
+                      />
+                    </div>
+                    <figcaption className="mt-4 text-xs font-medium leading-snug text-muted transition-colors group-hover:text-chalk sm:text-sm">
+                      {c.name}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ============================ CONTACT ============================ */}
         <section id="contact" className="relative flex min-h-[80svh] items-center overflow-hidden py-24">
           <Image
@@ -540,6 +611,7 @@ export default function Home() {
                   { href: "#skillset", label: "Skillset" },
                   { href: "#gameplan", label: "Game Plan" },
                   { href: "#squad", label: "Squad" },
+                  { href: "#trophies", label: "Trophies" },
                   { href: "#contact", label: "Contact" },
                 ].map((l) => (
                   <a
