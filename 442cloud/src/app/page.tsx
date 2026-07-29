@@ -511,7 +511,7 @@ export default function Home() {
               <Reveal delay={120}>
                 <div className="glass flex items-center gap-4 rounded-2xl px-6 py-4">
                   <span className="font-display text-4xl font-extrabold text-brand-400">
-                    {CERTS.length}
+                    27
                   </span>
                   <span className="text-sm leading-tight text-muted">
                     Salesforce
