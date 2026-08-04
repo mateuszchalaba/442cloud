@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import TacticBoard from "@/components/TacticBoard";
 import CookieConsent from "@/components/CookieConsent";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
+import GameLauncher from "@/components/GameLauncher";
 
 /* ============================================================
    Small building blocks
@@ -547,6 +548,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ============================ MINIGAME ============================ */}
+        <section id="game" className="relative overflow-hidden bg-ink-800 py-24 sm:py-32">
+          <div className="pitch-grid absolute inset-0 opacity-50" aria-hidden />
+          <div className="glow-brand absolute -right-40 top-10 h-96 w-96 opacity-20 blur-3xl" aria-hidden />
+
+          <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="grid items-center gap-14 lg:grid-cols-[1fr_auto]">
+              <div>
+                <SectionHeading
+                  eyebrow="Kick-off challenge"
+                  title={
+                    <>
+                      Take your shot at the{" "}
+                      <span className="text-brand-400">digital victory</span>
+                    </>
+                  }
+                  intro="Five penalties, one keeper, no pressure. Line up your aim, pick the right power and beat the goalkeeper — a little warm-up before we play the real match together."
+                />
+                <Reveal delay={160}>
+                  <ul className="mt-8 space-y-3 text-sm text-muted">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
+                      <span>
+                        <span className="text-white">Tap once</span> to lock your aim while the
+                        sight sweeps across the goal.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
+                      <span>
+                        <span className="text-white">Tap again</span> at the right power — aim high
+                        for the corners, but don&apos;t blaze it over the bar.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
+                      <span>
+                        Works with touch, mouse or the{" "}
+                        <span className="text-white">Space bar</span>. Nothing is saved — just for
+                        fun.
+                      </span>
+                    </li>
+                  </ul>
+                </Reveal>
+              </div>
+
+              <Reveal delay={120} className="w-full lg:w-[420px]">
+                <GameLauncher />
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
         {/* ============================ CONTACT ============================ */}
         <section id="contact" className="relative flex min-h-[80svh] items-center overflow-hidden py-24">
           <Image
@@ -614,6 +668,7 @@ export default function Home() {
                   { href: "#gameplan", label: "Game Plan" },
                   { href: "#squad", label: "Squad" },
                   { href: "#trophies", label: "Trophies" },
+                  { href: "#game", label: "Play" },
                   { href: "#contact", label: "Contact" },
                 ].map((l) => (
                   <a
