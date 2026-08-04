@@ -2,6 +2,8 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Reveal from "@/components/Reveal";
 import TacticBoard from "@/components/TacticBoard";
+import CookieConsent from "@/components/CookieConsent";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 /* ============================================================
    Small building blocks
@@ -511,7 +513,7 @@ export default function Home() {
               <Reveal delay={120}>
                 <div className="glass flex items-center gap-4 rounded-2xl px-6 py-4">
                   <span className="font-display text-4xl font-extrabold text-brand-400">
-                    27
+                    {CERTS.length}
                   </span>
                   <span className="text-sm leading-tight text-muted">
                     Salesforce
@@ -627,13 +629,18 @@ export default function Home() {
 
             <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 text-xs text-muted sm:flex-row sm:items-center">
               <span>© {new Date().getFullYear()} 442 Cloud. All rights reserved.</span>
-              <a href="mailto:contact@442cloud.com" className="hover:text-brand-300">
-                contact@442cloud.com
-              </a>
+              <div className="flex items-center gap-5">
+                <CookieSettingsButton className="hover:text-brand-300" />
+                <a href="mailto:contact@442cloud.com" className="hover:text-brand-300">
+                  contact@442cloud.com
+                </a>
+              </div>
             </div>
           </div>
         </footer>
       </main>
+
+      <CookieConsent />
     </>
   );
 }

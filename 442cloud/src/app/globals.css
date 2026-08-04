@@ -226,3 +226,12 @@ section[id] {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+@keyframes cookieIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim-cookie-in { animation: cookieIn 0.45s var(--ease-out-soft) both; }
+@media (prefers-reduced-motion: reduce) {
+  .anim-cookie-in { animation: none; }
+}
