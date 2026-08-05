@@ -155,10 +155,12 @@ const STEPS: { no: string; phase: string; title: string; desc: string }[] = [
   },
 ];
 
-const CREW: { name: string; role: string; photo: string; no: string }[] = [
-  { name: "Mateusz Chalaba", role: "CEO", photo: "/crew/mateusz.jpg", no: "10" },
-  { name: "Kamil Rzepka", role: "Board Member", photo: "/crew/kamil.jpg", no: "4" },
-  { name: "Michał Kwika", role: "Board Member", photo: "/crew/michal.jpg", no: "8" },
+// 👇 Replace each "linkedin" value with the person's real LinkedIn profile URL.
+//    Leave it as "" (empty) to hide the LinkedIn button for that person.
+const CREW: { name: string; role: string; photo: string; no: string; linkedin: string }[] = [
+  { name: "Mateusz Chalaba", role: "CEO", photo: "/crew/mateusz.jpg", no: "10", linkedin: "https://www.linkedin.com/in/" },
+  { name: "Kamil Rzepka", role: "Board Member", photo: "/crew/kamil.jpg", no: "4", linkedin: "https://www.linkedin.com/in/" },
+  { name: "Michał Kwika", role: "Board Member", photo: "/crew/michal.jpg", no: "8", linkedin: "https://www.linkedin.com/in/" },
 ];
 
 // Salesforce certifications — the trophy cabinet
@@ -481,12 +483,27 @@ export default function Home() {
                         {c.no}
                       </span>
                     </div>
-                    <div className="absolute inset-x-0 bottom-0 p-6">
-                      <span className="font-display text-[11px] uppercase tracking-[0.24em] text-brand-300">
-                        {c.role}
-                      </span>
-                      <h3 className="mt-1 font-display text-xl font-bold text-white">{c.name}</h3>
-                      <div className="accent-bar mt-3 w-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-6">
+                      <div>
+                        <span className="font-display text-[11px] uppercase tracking-[0.24em] text-brand-300">
+                          {c.role}
+                        </span>
+                        <h3 className="mt-1 font-display text-xl font-bold text-white">{c.name}</h3>
+                        <div className="accent-bar mt-3 w-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      </div>
+                      {c.linkedin && (
+                        <a
+                          href={c.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${c.name} on LinkedIn`}
+                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/85 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500/60 hover:bg-brand-500/20 hover:text-brand-300"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+                          </svg>
+                        </a>
+                      )}
                     </div>
                   </article>
                 </Reveal>
