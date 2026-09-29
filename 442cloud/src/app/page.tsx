@@ -179,6 +179,7 @@ const CERTS: { name: string; img: string }[] = [
   { name: "Platform Administrator", img: "/certs/platformAdmin.png" },
   { name: "Data 360 Consultant", img: "/certs/d360consultant.png" },
   { name: "Experience Cloud Consultant", img: "/certs/xperienceCloudConsultant.png" },
+  { name: "Accredited Agentforce Financial Services Professional", img: "/certs/accreditedFinancial.png" },
 ];
 
 export default function Home() {
@@ -534,7 +535,7 @@ export default function Home() {
                     {CERTS.length}
                   </span>
                   <span className="text-sm leading-tight text-muted">
-                    Salesforce
+                    unique Salesforce
                     <br />
                     certifications
                   </span>
